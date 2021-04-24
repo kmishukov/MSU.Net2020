@@ -7,13 +7,28 @@ namespace Task6
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Наполнение словаря");
+            Console.ForegroundColor = ConsoleColor.White;
             Translator translator = new EngDict();
-            translator.Add("hello", "приветики");
+            List<string> translations = new List<string>();
+            translations.Add("привет");
+            translations.Add("здравствуй");
+            translator.Add("hello", translations);
+            translator.Add("hello", "салют");
             translator.Add("игры", "games");
             translator.Add("игры", "toys");
 
-            List<string> hello = translator.GetTranslations("hello");
-            List<string> toys = translator.GetTranslations("игры");
+            string word1 = "hello";
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\nПереводы слова \"{word1}\":");
+            Console.ForegroundColor = ConsoleColor.White;
+            List<string> hello = translator.GetTranslations(word1);
+            string word2 = "игры";
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\nПереводы слова \"{word2}\":");
+            Console.ForegroundColor = ConsoleColor.White;
+            List<string> toys = translator.GetTranslations(word2);
         }
     }
 }

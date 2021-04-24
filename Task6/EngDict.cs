@@ -18,7 +18,6 @@ namespace Task6 {
         public EngDict() {
             _engWords = new Dictionary<string, HashSet<string>>
             {
-                { "hello", new HashSet<string> { "привет", "здравствуй"} },
                 { "bye", new HashSet<string> { "пока" } }
             };
 
@@ -67,6 +66,7 @@ namespace Task6 {
                     translations.Add(translation.ToLower());
                     currentDict.Add(word.ToLower(), translations);
                 }
+                Console.WriteLine($"{word} => {translation}");
             }
             return;
         }
