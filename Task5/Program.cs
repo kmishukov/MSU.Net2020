@@ -7,24 +7,18 @@ namespace Task5
         static void Main(string[] args)
         {
 
-            var nameStack = new MyStack<string>();
+            CustomStack<string> namesStack = new CustomStack<string>();
 
-            nameStack.Push("Alex");
-            nameStack.Push("Kostya");
-            nameStack.Push("Christine");
+            namesStack.Push("Alex");
+            namesStack.Push("Kostya");
+            namesStack.Push("Christine");
 
-            string topName = nameStack.Top();
-            Console.WriteLine($"Top: {topName}, total: {nameStack.Count()}");
-            string removedName = nameStack.Pop();
+            string topName = namesStack.Top();
+            Console.WriteLine($"Top: {topName}, total: {namesStack.Count()}");
+            string removedName = namesStack.Pop();
             Console.WriteLine($"Removed: {topName}");
-            string topName2 = nameStack.Top();
-            Console.WriteLine($"Top: {topName2},  total: {nameStack.Count()}");
-
-
-            var numbers = new MyStack<int>();
-            numbers.Push(5);
-
-
+            string topName2 = namesStack.Top();
+            Console.WriteLine($"Top: {topName2},  total: {namesStack.Count()}");
         }
     }
 }

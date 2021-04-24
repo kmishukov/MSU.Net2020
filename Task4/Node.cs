@@ -2,8 +2,8 @@
 
 namespace Task4 {
     class Node {
-        Node _next;
-        Complex _value;
+        private Node _next;
+        private Complex _value;
         public Node(Complex c) {
             _value = c;
             _next = null;
