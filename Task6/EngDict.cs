@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Linq;
 
-namespace Task6
-{
-    class EngDict: Translator
-    {
+namespace Task6 {
+    class EngDict : Translator {
+
+        enum Language {
+            Unknown = 0,
+            Russian = 1,
+            English = 2
+        }
+
         Dictionary<string, HashSet<string>> _engWords, _ruWords;
 
-        public EngDict()
-        {
+        public EngDict() {
             _engWords = new Dictionary<string, HashSet<string>>
             {
                 { "hello", new HashSet<string> { "привет", "здравствуй"} },
@@ -25,49 +30,59 @@ namespace Task6
         }
 
 
-        public List<string> GetTranslations(string word)
-        {
+        public List<string> GetTranslations(string word) {
             List<string> translations = new List<string>();
             HashSet<string> words;
-            if (_engWords.TryGetValue(word.ToLower(), out words))
-            {
+            if (_engWords.TryGetValue(word.ToLower(), out words)) {
+                translations = words.ToList();
+            }
+            if (_ruWords.TryGetValue(word.ToLower(), out words)) {
                 translations = words.ToList();
             }
 
             // Распечатка перевода
-            if (translations.Count > 0)
-            {
-                for (int i = 0; i < translations.Count; i++)
-                {
+            if (translations.Count > 0) {
+                for (int i = 0; i < translations.Count; i++) {
                     Console.WriteLine(translations[i]);
                 }
-            } else
-            {
+            } else {
                 Console.WriteLine("Данное слово в словаре не найдено.");
             }
 
             return translations;
         }
 
-        public void Add(string word, string translation)
-        {
+        public void Add(string word, List<string> translationsWords) {
+            Language lang = Language.Unknown;
+            CheckLanguage(word, ref lang);
+            if (lang == Language.Unknown) return;
+            Dictionary<string, HashSet<string>> currentDict = (lang == Language.English) ? _engWords : _ruWords;
+                 
             HashSet<string> translations;
-            if (_engWords.TryGetValue(word.ToLower(), out translations)) {
-                translations.Add(translation.ToLower());
-            } else
-            {
-                translations = new HashSet<string>();
-                translations.Add(translation.ToLower());
-                _engWords.Add(word.ToLower(), translations);
+            foreach (var translation in translationsWords) {
+                if (currentDict.TryGetValue(word.ToLower(), out translations)) {
+                    translations.Add(translation.ToLower());
+                } else {
+                    translations = new HashSet<string>();
+                    translations.Add(translation.ToLower());
+                    currentDict.Add(word.ToLower(), translations);
+                }
             }
-            Console.WriteLine($"Добавлен перевод \"{translation.ToLower()}\" к слову \"{word.ToLower()}\"");
             return;
         }
 
-        public void Add(string word, List<string> translations)
-        {
-            return;
+        public void Add(string word, string translation) {
+            Add(word, new List<string>() { translation });
         }
-      
+
+        private void CheckLanguage(string word, ref Language lang) {
+            if (Regex.IsMatch(word, @"\b[а-я]+\b")) {
+                lang = Language.Russian;
+            }
+            if (Regex.IsMatch(word, @"\b[a-z]+\b")) {
+                lang = Language.English;
+            }
+        }
+
     }
 }

@@ -9,8 +9,11 @@ namespace Task6
         {
             Translator translator = new EngDict();
             translator.Add("hello", "приветики");
+            translator.Add("игры", "games");
+            translator.Add("игры", "toys");
 
             List<string> hello = translator.GetTranslations("hello");
+            List<string> toys = translator.GetTranslations("игры");
         }
     }
 }
