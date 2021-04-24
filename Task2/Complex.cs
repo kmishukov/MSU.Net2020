@@ -107,6 +107,19 @@ namespace Task2 {
             return new Complex(a);
         }
 
+        public override bool Equals(object other) {
+            if (other == null || this.GetType() != other.GetType()) {
+                return false;
+            } else {
+                Complex a = (Complex)other;
+                return (_re == a.Re && _im == a.Im);
+            }
+        }
+
+        public override int GetHashCode() {
+            return _im.GetHashCode() * _re.GetHashCode();
+        }
+
         public override string ToString() {
             string re = (this.Re != 0) ? this.Re.ToString() : "";
             string im;
@@ -122,10 +135,5 @@ namespace Task2 {
 
             return re + im;
         }
-
-        public bool Equals(Complex other) {
-            return (_re == other.Re) && (_im == other.Im);
-        }
-
     }
 }
