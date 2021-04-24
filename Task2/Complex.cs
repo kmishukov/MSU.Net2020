@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Task2
 {
-    class Complex
+    public class Complex
     {
         private double _re, _im;
 
