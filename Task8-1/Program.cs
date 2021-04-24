@@ -8,8 +8,6 @@ namespace Task8_1
     {
         static void Main(string[] args)
         {
-            static void Main(string[] args)
-            {
                 string fileAdress;
 
                 if (args.Count() == 1)
@@ -65,7 +63,6 @@ namespace Task8_1
                     return phone.All(Char.IsDigit);
                 }
 
-            }
         }
     }
 }
