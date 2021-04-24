@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Task2 {
     public class Complex {
@@ -64,6 +62,10 @@ namespace Task2 {
             this._im = 0;
         }
 
+        public static Complex withModule(double m, double arg) {
+            return new Complex(m * Math.Cos(arg), m * Math.Sin(arg));
+        }
+
         // Override
         public static Complex operator +(Complex a, Complex b) {
             return new Complex(re: a.Re + b.Re, im: a.Im + b.Im);
@@ -83,6 +85,26 @@ namespace Task2 {
             double re = (a.Re * b.Re + a.Im * b.Im) / (b.Re * b.Re + b.Im * b.Im);
             double im = (a.Im * b.Re - a.Re * b.Im) / (b.Re * b.Re + b.Im * b.Im);
             return new Complex(re: re, im: im);
+        }
+
+        public static bool operator ==(Complex a, Complex b) {
+            if (ReferenceEquals(a, null)) {
+                return ReferenceEquals(b, null);
+            }
+            return (a.Equals(b));
+        }
+
+        public static bool operator !=(Complex a, Complex b) {
+            return !(a == b);
+        }
+
+        // TypeCasting
+        public static explicit operator double(Complex a) {
+            if (a == null) return double.NaN;
+            return a.Re;
+        }
+        public static explicit operator Complex(double a) {
+            return new Complex(a);
         }
 
         public override string ToString() {
