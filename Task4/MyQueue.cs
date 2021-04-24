@@ -1,65 +1,83 @@
 ﻿using System;
-using System.Collections.Generic;
 using Task2;
 
-namespace Task4
-{
-    class MyQueue
-    {
-        private List<Complex> _numbers;
+namespace Task4 {
+    class MyQueue {
+
+        private Node _head;
+        private Node _tail;
         private int _count;
 
         // Constructors
-        public MyQueue()
-        {
-            _numbers = new List<Complex>();
+        public MyQueue() {
+            _head = null;
+            _tail = null;
             _count = 0;
         }
 
-        // Methods
-        public void Enqueue(Complex a)
-        {
-            _numbers.Add(a);
+        /// <summary>
+        /// Добавляет комплексное число в конец очереди.
+        /// </summary>
+        public void Enqueue(Complex a) {
+            Node newNode = new Node(a);
+            if (_head == null) {
+                _head = newNode;
+                _tail = newNode;
+            } else {
+                _tail.next = newNode;
+                _tail = newNode;
+            }
             _count++;
             Console.WriteLine($"Добавлен элемент {a.ToString()}, кол-во элементов: {_count.ToString()}");
         }
 
-        public Complex Dequeue()
-        {
-            if (_count == 0)
-            {
+        /// <summary>
+        /// Выдаёт комплексное число из начала очереди и удаляет его из очереди.
+        /// </summary>
+        public Complex Dequeue() {
+            if (_head == null) {
                 return null;
             }
 
-            Complex a = _numbers[0];
-            _numbers.RemoveAt(0);
+            Complex a = _head.value;
+            _head = _head.next;
             _count--;
             Console.WriteLine($"Выдан элемент {a.ToString()}, кол-во элементов: {_count.ToString()}");
 
             return a;
         }
 
-        public Complex Peek()
-        {
-            return (_count > 0) ? _numbers[0] : null;
+        /// <summary>
+        /// Возвращает комплексное число, находящееся в начале очереди (не удаляя его).
+        /// </summary>
+        public Complex Peek() {
+            if (_head == null) {
+                return null;
+            }
+            return _head.value;
         }
 
-        public int Count()
-        {
+        /// <summary>
+        /// Возвращает кол-во элементов в очереди.
+        /// </summary>
+        public int Count() {
             return _count;
         }
 
-        public void Print()
-        {
-            if (_count == 0)
-            {
+        /// <summary>
+        /// Печать содержимого очереди.
+        /// </summary>
+        public void Print() {
+            if (_count == 0) {
                 Console.WriteLine("Очередь пуста");
                 return;
             }
             Console.WriteLine("Содержимое очереди:");
-            for (int i = 0; i < _count; i++)
-            {
-                Console.WriteLine($"{i}. {_numbers[i]}");
+
+            Node currentNode = _head;
+            while (currentNode != null) {
+                Console.WriteLine(currentNode.value.ToString());
+                currentNode = currentNode.next;
             }
         }
 
