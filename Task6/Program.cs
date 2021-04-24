@@ -6,7 +6,10 @@ namespace Task6
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Translator translator = new EngDict();
+            translator.Add("hello", "приветики");
+
+            List<string> hello = translator.GetTranslations("hello");
         }
     }
 }
