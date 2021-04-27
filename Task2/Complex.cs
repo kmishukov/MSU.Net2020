@@ -103,7 +103,7 @@ namespace Task2 {
             if (a == null) return double.NaN;
             return a.Re;
         }
-        public static explicit operator Complex(double a) {
+        public static implicit operator Complex(double a) {
             return new Complex(a);
         }
 
