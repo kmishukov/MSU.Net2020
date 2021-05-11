@@ -1,0 +1,62 @@
+﻿<Window x:Class="Task15.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task15"
+        mc:Ignorable="d"
+        Title="Notepad" Height="450" Width="800">
+    <DockPanel HorizontalAlignment="Stretch">
+        <Menu DockPanel.Dock="Top" Background="White">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New"/>
+                <MenuItem Header="_New Window"/>
+                <MenuItem Header="_Open..."/>
+                <MenuItem Header="_Save"/>
+                <MenuItem Header="_Save As..."/>
+                <Separator/>
+                <MenuItem Header="_Page Setup..."/>
+                <MenuItem Header="_Print..."/>
+                <Separator/>
+                <MenuItem Header="_Exit"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo"/>
+                <Separator/>
+                <MenuItem Header="_Cut"/>
+                <MenuItem Header="_Copy"/>
+                <MenuItem Header="_Paste"/>
+                <MenuItem Header="_Delete"/>
+                <Separator/>
+                <MenuItem Header="_Search with Bing..."/>
+                <MenuItem Header="_Find..."/>
+                <MenuItem Header="_Find Next"/>
+                <MenuItem Header="_Find Previous"/>
+                <MenuItem Header="_Replace..."/>
+                <MenuItem Header="_Go To..."/>
+                <Separator/>
+                <MenuItem Header="_Select All"/>
+                <MenuItem Header="_Time/Date"/>
+            </MenuItem>
+            <MenuItem Header="_Format">
+                <MenuItem Header="_Word Wrap"/>
+                <MenuItem Header="_Font..."/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Zoom">
+                    <MenuItem Header="_Zoom In"/>
+                    <MenuItem Header="_Zoom Out"/>
+                    <MenuItem Header="_Restore Default Zoom"/>
+                </MenuItem>
+                <MenuItem Header="Status Bar"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Zoom out"/>
+                <MenuItem Header="_Zoom out"/>
+                <Separator/>
+                <MenuItem Header="_About Notepad"/>
+            </MenuItem>
+        </Menu>
+        <TextBox x:Name="tb" Margin="0,0,0,20"/>
+    </DockPanel>
+</Window>
