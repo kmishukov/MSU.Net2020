@@ -39,21 +39,21 @@
                 <MenuItem Header="_Time/Date"/>
             </MenuItem>
             <MenuItem Header="_Format">
-                <MenuItem Header="_Word Wrap"/>
-                <MenuItem Header="_Font..."/>
+                <MenuItem Header="_Word Wrap" IsCheckable="true" Command="{Binding TextWrapCommand}"/>
+                <!--<MenuItem Header="_Font..."/>-->
             </MenuItem>
             <MenuItem Header="_View">
-                <MenuItem Header="_Zoom">
+                <!--<MenuItem Header="_Zoom">
                     <MenuItem Header="_Zoom In"/>
                     <MenuItem Header="_Zoom Out"/>
                     <MenuItem Header="_Restore Default Zoom"/>
-                </MenuItem>
-                <MenuItem Header="Status Bar"/>
+                </MenuItem>-->
+                <MenuItem Header="SpellCheck" IsCheckable="true" Command="{Binding SpellCheckCommand}"/>
             </MenuItem>
             <MenuItem Header="_Help">
+                <!--<MenuItem Header="_Zoom out"/>
                 <MenuItem Header="_Zoom out"/>
-                <MenuItem Header="_Zoom out"/>
-                <Separator/>
+                <Separator/>-->
                 <MenuItem Header="_About Notepad"/>
             </MenuItem>
         </Menu>

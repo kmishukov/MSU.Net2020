@@ -18,10 +18,12 @@ namespace Task15 {
         string _filename { get; set; }
         bool _isEdited = false;
 
+        public RelayCommand OpenCommand { get; private set; }
         public RelayCommand SaveCommand { get; private set; }
         public RelayCommand SaveAsCommand { get; private set; }
         public RelayCommand ExitCommand { get; private set; }
-        public RelayCommand OpenCommand { get; private set; }
+        public RelayCommand TextWrapCommand { get; private set; }
+        public RelayCommand SpellCheckCommand { get; private set; }
 
         public TextBoxViewModel(TextBox textbox) {
             _textbox = textbox;
@@ -29,6 +31,7 @@ namespace Task15 {
 
             _filepath = "";
             _filename = "";
+            _filetext = "";
 
             Application.Current.MainWindow.Closing += Closing;
 
@@ -36,6 +39,8 @@ namespace Task15 {
             SaveCommand = new RelayCommand(_ => Save());
             SaveAsCommand = new RelayCommand(_ => SaveAs());
             ExitCommand = new RelayCommand(_ => Exit());
+            TextWrapCommand = new RelayCommand(_ => ChangeTextWrap());
+            SpellCheckCommand = new RelayCommand(_ => ChangeSpellCheck());
 
         }
 
@@ -109,7 +114,7 @@ namespace Task15 {
             }
         }
 
-        public void Closing(object sender, CancelEventArgs e) {
+        private void Closing(object sender, CancelEventArgs e) {
             if (_isEdited) {
                 MessageBoxResult mbResult = MessageBox.Show("Остались несохранённые изменения, продолжить выход?", "Несохранённые изменения", MessageBoxButton.YesNo);
                 if (mbResult == MessageBoxResult.No) {
@@ -118,6 +123,14 @@ namespace Task15 {
             }
         }
 
+        private void ChangeTextWrap() {
+            _textbox.TextWrapping = _textbox.TextWrapping == TextWrapping.NoWrap ? TextWrapping.Wrap : TextWrapping.NoWrap;
+        }
+
+        private void ChangeSpellCheck() {
+            bool isEnabled = SpellCheck.GetIsEnabled(_textbox);
+            SpellCheck.SetIsEnabled(_textbox, !isEnabled);
+        }
     }
 }
 
