@@ -20,6 +20,7 @@ namespace Task15 {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+            DataContext = new TextBoxViewModel(textbox);
         }
     }
 }
