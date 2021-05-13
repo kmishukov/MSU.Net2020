@@ -24,6 +24,13 @@ namespace Task15 {
         public RelayCommand ExitCommand { get; private set; }
         public RelayCommand TextWrapCommand { get; private set; }
         public RelayCommand SpellCheckCommand { get; private set; }
+        public RelayCommand UndoCommand { get; private set; }
+        public RelayCommand RedoCommand { get; private set; }
+        public RelayCommand CopyCommand { get; private set; }
+        public RelayCommand CutCommand { get; private set; }
+        public RelayCommand PasteCommand { get; private set; }
+        public RelayCommand SelectAllCommand { get; private set; }
+        public RelayCommand AboutCommand { get; private set; }
 
         public TextBoxViewModel(TextBox textbox) {
             _textbox = textbox;
@@ -41,7 +48,13 @@ namespace Task15 {
             ExitCommand = new RelayCommand(_ => Exit());
             TextWrapCommand = new RelayCommand(_ => ChangeTextWrap());
             SpellCheckCommand = new RelayCommand(_ => ChangeSpellCheck());
-
+            UndoCommand = new RelayCommand(_ => Undo());
+            RedoCommand = new RelayCommand(_ => Redo());
+            CopyCommand = new RelayCommand(_ => Copy());
+            CutCommand = new RelayCommand(_ => Cut());
+            PasteCommand = new RelayCommand(_ => Paste());
+            SelectAllCommand = new RelayCommand(_ => SelectAll(), _ => _filetext != "");
+            AboutCommand = new RelayCommand(_ => About());
         }
 
         public void TextChanged(object sender, EventArgs e) {
@@ -97,7 +110,7 @@ namespace Task15 {
 
         private void Exit() {
             if (_isEdited) {
-                MessageBoxResult mbResult = MessageBox.Show("Сохранить изменения?", "Несохранённые изменения", MessageBoxButton.YesNoCancel);
+                MessageBoxResult mbResult = MessageBox.Show("Сохранить изменения?", "Внимание", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 switch (mbResult) {
                     case MessageBoxResult.Yes:
                         Save();
@@ -116,7 +129,7 @@ namespace Task15 {
 
         private void Closing(object sender, CancelEventArgs e) {
             if (_isEdited) {
-                MessageBoxResult mbResult = MessageBox.Show("Остались несохранённые изменения, продолжить выход?", "Несохранённые изменения", MessageBoxButton.YesNo);
+                MessageBoxResult mbResult = MessageBox.Show("Остались несохранённые изменения,\nВы действительно хотите выйти?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (mbResult == MessageBoxResult.No) {
                         e.Cancel = true;
                 }
@@ -130,6 +143,29 @@ namespace Task15 {
         private void ChangeSpellCheck() {
             bool isEnabled = SpellCheck.GetIsEnabled(_textbox);
             SpellCheck.SetIsEnabled(_textbox, !isEnabled);
+        }
+
+        private void Undo() {
+            _textbox.Undo();
+        }
+        private void Redo() {
+            _textbox.Redo();
+        }
+        private void Copy() {
+            _textbox.Copy();
+        }
+        private void Cut() {
+            _textbox.Cut();
+        }
+        private void Paste() {
+            _textbox.Paste();
+        }
+        private void SelectAll() {
+            _textbox.SelectAll();
+        }
+
+        private void About() {
+            MessageBox.Show("Notepad Application\nby Mishukov Konstantin, 2021","About Notepad");
         }
     }
 }
