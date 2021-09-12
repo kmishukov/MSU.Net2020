@@ -64,7 +64,6 @@ namespace Task1 {
             double performance2 = (N * N * N) / 2 / duration2;
             Console.WriteLine("Производительность " + performance2 + " ГФлопс");
             Console.ReadLine();
-
         }
     }
 }
